@@ -29,8 +29,10 @@ contract ProtocolCampNFT is ERC721, Ownable {
     // constructor() ERC721("Protocol Campers", "PCAMP")  {
     // }
 
-    constructor() ERC721("WTest v7", "TEST")  {
+    constructor() ERC721("WTest v8", "TEST")  {
     }
+
+    event NewEpicNFTMinted(address sender, uint256 tokenId);
 
     function mintWL(bytes32[] calldata _merkleProof, uint256 _id) public {
 
@@ -54,6 +56,10 @@ contract ProtocolCampNFT is ERC721, Ownable {
         _mint(recipient, _id);
         // console.log("Trying to send %s tokens", _id);
         // console.log("Token uri", tokenURI(_id));
+
+         // EMIT MAGICAL EVENTS.
+        emit NewEpicNFTMinted(msg.sender, _id);
+
         return _id;
     }
 
