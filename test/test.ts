@@ -26,19 +26,27 @@ describe('ProtocolCampNFT',()=>{
         [owner, addr1, addr2, addr3, addr4] = await ethers.getSigners();
         
         let whitelistAddresses = [
-            {key: owner.address, value: 0},
-            {key: addr1.address, value: 1},
+        //   {key: "0xcA3266F30f72fB8cF41b3A697338bAFA59435Eba", value: 0},
+            // {key: owner.address, value: 0},
+            // {key: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8", value: 1},
+            {key: "0xcA3266F30f72fB8cF41b3A697338bAFA59435Eba", value: 0},
+            {key: "0x7e6c8d5D3C01176a6bd5A61e32350A6116167148", value: 1}, 
+            {key: "0x58e2211855a45706e6A9c084CaA4Ae35DFA50325", value: 2}, 
         ]   
 
         // console.log(whitelistAddresses);
         // console.log(addr1.address);
         
         const leaves = whitelistAddresses.map(object => 
-            web3.utils.soliditySha3({t: 'address', v: object.key}, {t: 'uint256', v: object.value})
+            // web3.utils.soliditySha3({t: 'address', v: object.key}, {t: 'uint256', v: object.value})
+            ethers.utils.solidityKeccak256([ "address", "uint256" ], [ object.key, object.value ])
         );
         tree = new MerkleTree(leaves, keccak256, { sort: true });
         const root_merkle = tree.getRoot();
         console.log(tree.toString());
+
+        console.log('tree: ', tree.toString);
+
         // console.log('root: '+ tree.getHexRoot());
 
 
@@ -53,8 +61,12 @@ describe('ProtocolCampNFT',()=>{
     });
 
     it("Should success mint - WL", async function () {
-        const hexProof = tree.getHexProof(web3.utils.soliditySha3({t: 'address', v: addr1.address}, {t: 'uint256', v:1}));
-        console.log('hex: '+ hexProof);
+        const hexProof
+            //  = tree.getHexProof(web3.utils.soliditySha3({t: 'address', v: addr1.address}, {t: 'uint256', v:1}));
+            = tree.getHexProof(ethers.utils.solidityKeccak256([ "address", "uint256" ], [ "0x58e2211855a45706e6A9c084CaA4Ae35DFA50325", 2]));
+        
+        console.log('add: '+ addr1.address);
+        console.log('hex: ', hexProof);
         // await nft_contract.connect(addr1).mintWL(['0x88d11c85c2834de10968810cd22310734fb85a55b24a269a208f79f711da9fac'], 0);
         await nft_contract.connect(addr1).mintWL(hexProof, 1);
 
