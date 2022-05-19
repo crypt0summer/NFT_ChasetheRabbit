@@ -26,10 +26,8 @@ contract ProtocolCampNFT is ERC721, Ownable {
     string private _baseTokenURI;
 
 
-    // constructor() ERC721("Protocol Campers", "PCAMP")  {
-    // }
-
-    constructor() ERC721("WTest v9", "TEST")  {
+    constructor() ERC721("Protocol Campers", "PCAMP")  {
+    // constructor() ERC721("WTest v9", "TEST")  {
     }
 
     event NewEpicNFTMinted(address sender, uint256 tokenId);

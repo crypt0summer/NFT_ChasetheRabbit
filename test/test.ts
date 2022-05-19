@@ -21,19 +21,40 @@ describe('ProtocolCampNFT',()=>{
     let nft_contract: Contract;   
     let tree: any;
     
+    const checkEmptyAddr = async(val : any) => {
+        return val!== undefined ? val: "EMPTY_ENV"
+       }
+       
     before(async function () {
         //wallets
         [owner, addr1, addr2, addr3, addr4] = await ethers.getSigners();
         
-        let whitelistAddresses = [
-        //   {key: "0xcA3266F30f72fB8cF41b3A697338bAFA59435Eba", value: 0},
-            // {key: owner.address, value: 0},
-            // {key: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8", value: 1},
-            {key: "0xcA3266F30f72fB8cF41b3A697338bAFA59435Eba", value: 0},
-            {key: "0x7e6c8d5D3C01176a6bd5A61e32350A6116167148", value: 1}, 
-            {key: "0x58e2211855a45706e6A9c084CaA4Ae35DFA50325", value: 2}, 
-        ]   
+        // let whitelistAddresses = [
+        // //   {key: "0xcA3266F30f72fB8cF41b3A697338bAFA59435Eba", value: 0},
+        //     // {key: owner.address, value: 0},
+        //     // {key: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8", value: 1},
+        //     {key: "0xcA3266F30f72fB8cF41b3A697338bAFA59435Eba", value: 0},
+        //     {key: "0x7e6c8d5D3C01176a6bd5A61e32350A6116167148", value: 1}, 
+        //     {key: "0x58e2211855a45706e6A9c084CaA4Ae35DFA50325", value: 2}, 
+        // ]   
 
+        let whitelistAddresses = [
+            {key: await(checkEmptyAddr(process.env.WL0)), value: 0},
+            {key: await(checkEmptyAddr(process.env.WL1)), value: 1},
+            {key: await(checkEmptyAddr(process.env.WL2)), value: 2},
+            {key: await(checkEmptyAddr(process.env.WL3)), value: 3},
+            {key: await(checkEmptyAddr(process.env.WL4)), value: 4},
+            {key: await(checkEmptyAddr(process.env.WL5)), value: 5},
+            {key: await(checkEmptyAddr(process.env.WL6)), value: 6},
+            {key: await(checkEmptyAddr(process.env.WL7)), value: 7},
+            {key: await(checkEmptyAddr(process.env.WL8)), value: 8},
+            {key: await(checkEmptyAddr(process.env.WL9)), value: 9},
+            {key: await(checkEmptyAddr(process.env.WL10)), value: 10},
+            {key: await(checkEmptyAddr(process.env.WL11)), value: 11},
+            {key: await(checkEmptyAddr(process.env.WL12)), value: 12},
+            {key: await(checkEmptyAddr(process.env.WL13)), value: 13},
+            {key: await(checkEmptyAddr(process.env.WL14)), value: 14},
+        ]  
         // console.log(whitelistAddresses);
         // console.log(addr1.address);
         
