@@ -19,7 +19,7 @@ const main = async () => {
   await nftContract.setBaseURI(baseUri);
   await nftContract.setMerkleRoot(root_merkle);
 
-  let [owner, addr1, addr2, addr3] = await ethers.getSigners();
+  // let [owner, addr1, addr2, addr3] = await ethers.getSigners();
 
 
   //계정 1 0x7e6c8d5D3C01176a6bd5A61e32350A6116167148 민팅테스트
@@ -50,7 +50,7 @@ const main = async () => {
 
 
 const setWL = async () => {
-  let [owner, addr1, addr2, addr3] = await ethers.getSigners();
+  // let [owner, addr1, addr2, addr3] = await ethers.getSigners();
   // let whitelistAddresses = [
   //   //   {key: "0xcA3266F30f72fB8cF41b3A697338bAFA59435Eba", value: 0},
   //       // {key: owner.address, value: 0},
@@ -58,6 +58,7 @@ const setWL = async () => {
   //       {key: "0xcA3266F30f72fB8cF41b3A697338bAFA59435Eba", value: 0},
   //       {key: "0x7e6c8d5D3C01176a6bd5A61e32350A6116167148", value: 1}, 
   //       {key: "0x58e2211855a45706e6A9c084CaA4Ae35DFA50325", value: 2}, 
+  //       {key: "0x1c83cFAC1E45b13887e8487B9Dd0e98d2b99522F", value: 3}, 
   //   ]      
  
   let whitelistAddresses = [
@@ -83,8 +84,6 @@ const setWL = async () => {
       web3.utils.soliditySha3({t: 'address', v: object.key}, {t: 'uint256', v: object.value})
   );
   tree = new MerkleTree(leaves, keccak256, { sort: true });
-
-  console.log("tree");
 
   // console.log(tree);
   console.log(tree.toString());

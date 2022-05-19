@@ -57,7 +57,7 @@ const config: HardhatUserConfig = {
         chainId: 1,
         url: process.env.MAINNET_URL,
         accounts: 
-          process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+          process.env.PRIVATE_KEY_MAINNET !== undefined ? [process.env.PRIVATE_KEY_MAINNET] : [],
       },
   },
   gasReporter: {
